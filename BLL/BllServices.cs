@@ -11,7 +11,8 @@ namespace BLL
             services.BindMapper();
             services.AddTransient<ICarriageService, CarriageService>()
                 .AddTransient<ITrainService, TrainService>()
-                .AddTransient<ITicketService, TicketService>();
+                .AddTransient<ITicketService, TicketService>()
+                .AddTransient<ISeatService, SeatService>();
             return services;
         }
     }

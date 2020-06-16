@@ -10,8 +10,8 @@ namespace BLL.Services
 
         public ICollection<Carriage> GetSpecifiedCarriages(CarriageClass carriageClass, Train train)
         {
-            var carriages = train.Carriages.Where(c => c.Class.Equals(carriageClass));
-            return carriages as ICollection<Carriage>;
+            var carriages = train.Carriages.Where(c => c.Class == carriageClass).ToList();
+            return carriages;
         }
 
         public Carriage GetCarriageByNum(Train train, int num)

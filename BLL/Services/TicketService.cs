@@ -30,12 +30,9 @@ namespace BLL.Services
             else
                 ticket.Number = 1;
 
-            var seat = _carriageService.GetCarriageByNum(_trainService.GetTrainByNum(ticket.TrainNumber),
-                ticket.CarriageNumber).Seats.First(s => s.Number == ticket.Seat);
-            seat.IsTaken = true;
-
             var ticketEntity = _mapper.Map<TicketEntity>(ticket);
             _inMemoryStorage.Tickets.Add(ticketEntity);
+            _inMemoryStorage.Save();
             return ticket;
         }
     }
