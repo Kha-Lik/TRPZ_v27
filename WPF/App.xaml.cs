@@ -38,7 +38,8 @@ namespace TRPZ_v27
             var mainWindowViewModel =
                 new MainWindowViewModel(ServiceProvider.GetService<ITrainService>(), 
                     ServiceProvider.GetService<ICarriageService>(),
-                    ServiceProvider.GetService<ITicketService>());
+                    ServiceProvider.GetService<ITicketService>(),
+                    ServiceProvider.GetService<ISeatService>());
             
             DisplayRootRegistry.ShowModalPresentation(mainWindowViewModel);
             

@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="900">
+        Title="MainWindow" Height="450" Width="915"
+        ResizeMode="CanMinimize">
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="14" />
@@ -19,10 +20,13 @@
             <Setter Property="Margin" Value="3" />
             <Setter Property="Background" Value="Lavender" />
         </Style>
+        <Style TargetType="StackPanel">
+            <Setter Property="Margin" Value="5"></Setter>
+        </Style>
     </Window.Resources>
     <Grid>
         <StackPanel Orientation="Horizontal">
-            <StackPanel>
+            <StackPanel Width="225">
                 <TextBlock>Source city</TextBlock>
                 <TextBox Text="{Binding SourceCity}"></TextBox>
                 <TextBlock>Destination city</TextBlock>
@@ -30,26 +34,53 @@
                 <DatePicker SelectedDate="{Binding Date}"></DatePicker>
                 <Button Command="{Binding FindTrainsCommand}">Find trains</Button>
             </StackPanel>
-            <StackPanel>
+            <StackPanel Width="225">
                 <TextBlock>Class</TextBlock>
-                <ComboBox SelectedItem="{Binding Class}" ItemsSource="{Binding Classes}"></ComboBox>
+                <ComboBox SelectedItem="{Binding Class}" ItemsSource="{Binding Classes}" Margin="5"></ComboBox>
                 <TextBlock>Trains</TextBlock>
-                <ListBox SelectedItem="{Binding SelectedTrain}" ItemsSource="{Binding Trains}"></ListBox>
+                <ListBox SelectedItem="{Binding SelectedTrain}" ItemsSource="{Binding Trains}" MinHeight="200">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock>Train number</TextBlock>
+                                <TextBox IsReadOnly="True" Text="{Binding Path=Number}"></TextBox>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
                 <Button Command="{Binding FindCarriagesCommand}">Find carriages</Button>
             </StackPanel>
-            <StackPanel>
+            <StackPanel Width="225">
                 <TextBlock>Passenger</TextBlock>
                 <TextBox Text="{Binding Passenger}"></TextBox>
                 <TextBlock>Carriages</TextBlock>
-                <ListBox SelectedItem="{Binding SelectedCarriage}" ItemsSource="{Binding Carriages}"></ListBox>
+                <ListBox SelectedItem="{Binding SelectedCarriage}" ItemsSource="{Binding Carriages}" MinHeight="200">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock>Carriage number</TextBlock>
+                                <TextBox IsReadOnly="True" Text="{Binding Path=Number}"></TextBox>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
                 <Button Command="{Binding TakeTicketCommand}">Take ticket</Button>
             </StackPanel>
-            <StackPanel>
+            <StackPanel Width="225">
                 <TextBlock>Seats</TextBlock>
-                <ListBox SelectedItem="{Binding SelectedSeat}" ItemsSource="{Binding Seats}"></ListBox>
+                <ListBox SelectedItem="{Binding SelectedSeat}" ItemsSource="{Binding Seats}" MinHeight="200">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock>Seat number</TextBlock>
+                                <TextBox IsReadOnly="True" Text="{Binding Path=Number}"></TextBox>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>                
                 <StackPanel Orientation="Horizontal">
                     <TextBlock> №: </TextBlock>
-                    <TextBox Text="{Binding TicketNum}" IsReadOnly="True"></TextBox>
+                    <TextBox Text="{Binding TicketNum}" IsReadOnly="True" MinWidth="150"></TextBox>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

@@ -14,6 +14,7 @@ namespace TRPZ_v27
         private readonly ITrainService _trainService;
         private readonly ICarriageService _carriageService;
         private readonly ITicketService _ticketService;
+        private readonly ISeatService _seatService;
 
         private ICollection<Train> _trains;
         private ICollection<Carriage> _carriages;
@@ -33,11 +34,14 @@ namespace TRPZ_v27
         private RelayCommand _findCarriagesCommand;
         private RelayCommand _takeTicketCommand;
 
-        public MainWindowViewModel(ITrainService trainService, ICarriageService carriageService, ITicketService ticketService)
+        public MainWindowViewModel(ITrainService trainService, ICarriageService carriageService, ITicketService ticketService, ISeatService seatService)
         {
             _trainService = trainService;
             _carriageService = carriageService;
             _ticketService = ticketService;
+            _seatService = seatService;
+
+            Date = DateTime.Today;
         }
 
         public ICollection<Train> Trains
@@ -87,7 +91,7 @@ namespace TRPZ_v27
             {
                 _carriage = value;
                 OnPropertyChanged(nameof(SelectedCarriage));
-                Seats = value.Seats.Where(s => !s.IsTaken) as ICollection<Seat>;
+                Seats = value.Seats.Where(s => !s.IsTaken).ToList();
             }
         } 
         
@@ -187,6 +191,8 @@ namespace TRPZ_v27
                 TrainNumber = SelectedTrain.Number
             };
             TicketNum = _ticketService.TakeTicket(ticket).Number;
+            _seatService.TakeSeat(SelectedSeat);
+            Seats = SelectedCarriage.Seats.Where(s => !s.IsTaken).ToList();
         }, o => CheckTicket());
 
         public event PropertyChangedEventHandler PropertyChanged;
