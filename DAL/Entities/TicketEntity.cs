@@ -2,6 +2,7 @@
 
 namespace DAL.Entities
 {
+    [Serializable]
     public class TicketEntity
     {
         public Int64 Number { get; set; }

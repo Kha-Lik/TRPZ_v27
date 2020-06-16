@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace DAL.Entities
 {
+    [Serializable]
     public class TrainEntity
     {
         public int Number { get; set; }

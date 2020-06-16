@@ -9,19 +9,21 @@ namespace DAL
     [Serializable]
     public class InMemoryStorage : IInMemoryStorage
     {
+        [NonSerialized]
         private ISerializer _serializer;
+        [NonSerialized]
         private readonly string _path = ConfigurationManager.AppSettings.Get("SerializationPath");
 
         public InMemoryStorage(ISerializer serializer)
         {
             _serializer = serializer;
 
-            /*var storage = _serializer.Deserialize(_path) as InMemoryStorage;
+            var storage = _serializer.Deserialize(_path) as InMemoryStorage;
             Trains = storage.Trains;
-            Tickets = storage.Tickets;*/
+            Tickets = storage.Tickets;
 
 
-            var train1 = new TrainEntity
+            /*var train1 = new TrainEntity
             {
             Number = 1, 
             Carriages = new List<CarriageEntity>
@@ -137,8 +139,8 @@ namespace DAL
             }
         };
         
-        Trains.Add(train1);
-        Trains.Add(train2);
+            Trains.Add(train1);
+            Trains.Add(train2);*/
 
         }
 

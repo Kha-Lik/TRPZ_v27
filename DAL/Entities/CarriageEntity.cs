@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DAL.Entities
 {
+    [Serializable]
     public class CarriageEntity
     {
         public int Number { get; set; }

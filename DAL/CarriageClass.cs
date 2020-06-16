@@ -1,5 +1,8 @@
-﻿namespace DAL
+﻿using System;
+
+namespace DAL
 {
+    [Serializable]
     public enum CarriageClass
     {
         First = 1,
