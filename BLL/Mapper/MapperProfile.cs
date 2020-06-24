@@ -12,7 +12,7 @@ namespace BLL.Mapper
             CreateMap<TrainEntity, Train>()
                 .ForMember(t => t.Cities, opt =>
                     opt.MapFrom(te => te.Cities.Select(c => c.CityEntity)))
-                .ForMember(t => t.Dates, opt => 
+                .ForMember(t => t.Dates, opt =>
                     opt.MapFrom(te => te.Dates.Select(d => d.Day)));
             CreateMap<Train, TrainEntity>()
                 .ForMember(te => te.Cities, opt =>

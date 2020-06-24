@@ -4,7 +4,7 @@ using System.Windows;
 
 namespace TRPZ_v27.Services
 {
-     public class DisplayRootRegistry
+    public class DisplayRootRegistry
     {
         private readonly Dictionary<object, Window> _openWindows = new Dictionary<object, Window>();
         private readonly Dictionary<Type, Type> _vmToWindowMapping = new Dictionary<Type, Type>();

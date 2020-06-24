@@ -8,34 +8,28 @@ namespace dal.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "CityEntity",
-                columns: table => new
+                "CityEntity",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CityEntity", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_CityEntity", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "DayEntity",
-                columns: table => new
+                "DayEntity",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Date = table.Column<DateTime>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DayEntity", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_DayEntity", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "TicketEntities",
-                columns: table => new
+                "TicketEntities",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -48,27 +42,21 @@ namespace dal.Migrations
                     CarriageNumber = table.Column<int>(nullable: false),
                     Seat = table.Column<int>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TicketEntities", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_TicketEntities", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "TrainEntities",
-                columns: table => new
+                "TrainEntities",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Number = table.Column<int>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TrainEntities", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_TrainEntities", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "CarriageEntity",
-                columns: table => new
+                "CarriageEntity",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -80,16 +68,16 @@ namespace dal.Migrations
                 {
                     table.PrimaryKey("PK_CarriageEntity", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CarriageEntity_TrainEntities_TrainId",
-                        column: x => x.TrainId,
-                        principalTable: "TrainEntities",
-                        principalColumn: "Id",
+                        "FK_CarriageEntity_TrainEntities_TrainId",
+                        x => x.TrainId,
+                        "TrainEntities",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "CitiesTrains",
-                columns: table => new
+                "CitiesTrains",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -100,22 +88,22 @@ namespace dal.Migrations
                 {
                     table.PrimaryKey("PK_CitiesTrains", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CitiesTrains_CityEntity_CityEntityId",
-                        column: x => x.CityEntityId,
-                        principalTable: "CityEntity",
-                        principalColumn: "Id",
+                        "FK_CitiesTrains_CityEntity_CityEntityId",
+                        x => x.CityEntityId,
+                        "CityEntity",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CitiesTrains_TrainEntities_TrainEntityId",
-                        column: x => x.TrainEntityId,
-                        principalTable: "TrainEntities",
-                        principalColumn: "Id",
+                        "FK_CitiesTrains_TrainEntities_TrainEntityId",
+                        x => x.TrainEntityId,
+                        "TrainEntities",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "DaysTrains",
-                columns: table => new
+                "DaysTrains",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -126,22 +114,22 @@ namespace dal.Migrations
                 {
                     table.PrimaryKey("PK_DaysTrains", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DaysTrains_DayEntity_DayId",
-                        column: x => x.DayId,
-                        principalTable: "DayEntity",
-                        principalColumn: "Id",
+                        "FK_DaysTrains_DayEntity_DayId",
+                        x => x.DayId,
+                        "DayEntity",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DaysTrains_TrainEntities_TrainEntityId",
-                        column: x => x.TrainEntityId,
-                        principalTable: "TrainEntities",
-                        principalColumn: "Id",
+                        "FK_DaysTrains_TrainEntities_TrainEntityId",
+                        x => x.TrainEntityId,
+                        "TrainEntities",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SeatEntity",
-                columns: table => new
+                "SeatEntity",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -153,156 +141,156 @@ namespace dal.Migrations
                 {
                     table.PrimaryKey("PK_SeatEntity", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SeatEntity_CarriageEntity_CarriageEntityId",
-                        column: x => x.CarriageEntityId,
-                        principalTable: "CarriageEntity",
-                        principalColumn: "Id",
+                        "FK_SeatEntity_CarriageEntity_CarriageEntityId",
+                        x => x.CarriageEntityId,
+                        "CarriageEntity",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
-                table: "CityEntity",
-                columns: new[] { "Id", "Name" },
-                values: new object[,]
+                "CityEntity",
+                new[] {"Id", "Name"},
+                new object[,]
                 {
-                    { 1, "Kyiv" },
-                    { 2, "Lviv" },
-                    { 3, "Zhytomyr" },
-                    { 4, "Chernivtsi" },
-                    { 5, "Sumy" }
+                    {1, "Kyiv"},
+                    {2, "Lviv"},
+                    {3, "Zhytomyr"},
+                    {4, "Chernivtsi"},
+                    {5, "Sumy"}
                 });
 
             migrationBuilder.InsertData(
-                table: "DayEntity",
-                columns: new[] { "Id", "Date" },
-                values: new object[,]
+                "DayEntity",
+                new[] {"Id", "Date"},
+                new object[,]
                 {
-                    { 1, new DateTime(2020, 6, 24, 0, 0, 0, 0, DateTimeKind.Local) },
-                    { 2, new DateTime(2020, 6, 25, 0, 0, 0, 0, DateTimeKind.Local) },
-                    { 3, new DateTime(2020, 6, 26, 0, 0, 0, 0, DateTimeKind.Local) }
+                    {1, new DateTime(2020, 6, 24, 0, 0, 0, 0, DateTimeKind.Local)},
+                    {2, new DateTime(2020, 6, 25, 0, 0, 0, 0, DateTimeKind.Local)},
+                    {3, new DateTime(2020, 6, 26, 0, 0, 0, 0, DateTimeKind.Local)}
                 });
 
             migrationBuilder.InsertData(
-                table: "TrainEntities",
-                columns: new[] { "Id", "Number" },
-                values: new object[,]
+                "TrainEntities",
+                new[] {"Id", "Number"},
+                new object[,]
                 {
-                    { 1, 1 },
-                    { 2, 1 }
+                    {1, 1},
+                    {2, 1}
                 });
 
             migrationBuilder.InsertData(
-                table: "CarriageEntity",
-                columns: new[] { "Id", "Class", "Number", "TrainId" },
-                values: new object[,]
+                "CarriageEntity",
+                new[] {"Id", "Class", "Number", "TrainId"},
+                new object[,]
                 {
-                    { 1, 1, 1, 1 },
-                    { 2, 2, 2, 1 },
-                    { 3, 2, 1, 2 },
-                    { 4, 4, 2, 2 }
+                    {1, 1, 1, 1},
+                    {2, 2, 2, 1},
+                    {3, 2, 1, 2},
+                    {4, 4, 2, 2}
                 });
 
             migrationBuilder.InsertData(
-                table: "CitiesTrains",
-                columns: new[] { "Id", "CityEntityId", "TrainEntityId" },
-                values: new object[,]
+                "CitiesTrains",
+                new[] {"Id", "CityEntityId", "TrainEntityId"},
+                new object[,]
                 {
-                    { 1, 1, 1 },
-                    { 2, 2, 1 },
-                    { 3, 3, 1 },
-                    { 4, 4, 1 },
-                    { 5, 1, 2 },
-                    { 6, 3, 2 },
-                    { 7, 5, 2 }
+                    {1, 1, 1},
+                    {2, 2, 1},
+                    {3, 3, 1},
+                    {4, 4, 1},
+                    {5, 1, 2},
+                    {6, 3, 2},
+                    {7, 5, 2}
                 });
 
             migrationBuilder.InsertData(
-                table: "DaysTrains",
-                columns: new[] { "Id", "DayId", "TrainEntityId" },
-                values: new object[,]
+                "DaysTrains",
+                new[] {"Id", "DayId", "TrainEntityId"},
+                new object[,]
                 {
-                    { 1, 1, 1 },
-                    { 2, 2, 1 },
-                    { 3, 3, 1 },
-                    { 4, 1, 2 },
-                    { 5, 3, 2 }
+                    {1, 1, 1},
+                    {2, 2, 1},
+                    {3, 3, 1},
+                    {4, 1, 2},
+                    {5, 3, 2}
                 });
 
             migrationBuilder.InsertData(
-                table: "SeatEntity",
-                columns: new[] { "Id", "CarriageEntityId", "IsTaken", "Number" },
-                values: new object[,]
+                "SeatEntity",
+                new[] {"Id", "CarriageEntityId", "IsTaken", "Number"},
+                new object[,]
                 {
-                    { 1, 1, false, 1 },
-                    { 2, 1, false, 2 },
-                    { 3, 1, false, 3 },
-                    { 4, 2, false, 1 },
-                    { 5, 2, false, 2 },
-                    { 6, 2, false, 3 },
-                    { 7, 3, false, 1 },
-                    { 8, 3, false, 2 },
-                    { 9, 3, false, 3 },
-                    { 10, 4, false, 1 },
-                    { 11, 4, false, 2 },
-                    { 12, 4, false, 3 }
+                    {1, 1, false, 1},
+                    {2, 1, false, 2},
+                    {3, 1, false, 3},
+                    {4, 2, false, 1},
+                    {5, 2, false, 2},
+                    {6, 2, false, 3},
+                    {7, 3, false, 1},
+                    {8, 3, false, 2},
+                    {9, 3, false, 3},
+                    {10, 4, false, 1},
+                    {11, 4, false, 2},
+                    {12, 4, false, 3}
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CarriageEntity_TrainId",
-                table: "CarriageEntity",
-                column: "TrainId");
+                "IX_CarriageEntity_TrainId",
+                "CarriageEntity",
+                "TrainId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CitiesTrains_CityEntityId",
-                table: "CitiesTrains",
-                column: "CityEntityId");
+                "IX_CitiesTrains_CityEntityId",
+                "CitiesTrains",
+                "CityEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CitiesTrains_TrainEntityId",
-                table: "CitiesTrains",
-                column: "TrainEntityId");
+                "IX_CitiesTrains_TrainEntityId",
+                "CitiesTrains",
+                "TrainEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DaysTrains_DayId",
-                table: "DaysTrains",
-                column: "DayId");
+                "IX_DaysTrains_DayId",
+                "DaysTrains",
+                "DayId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DaysTrains_TrainEntityId",
-                table: "DaysTrains",
-                column: "TrainEntityId");
+                "IX_DaysTrains_TrainEntityId",
+                "DaysTrains",
+                "TrainEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SeatEntity_CarriageEntityId",
-                table: "SeatEntity",
-                column: "CarriageEntityId");
+                "IX_SeatEntity_CarriageEntityId",
+                "SeatEntity",
+                "CarriageEntityId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CitiesTrains");
+                "CitiesTrains");
 
             migrationBuilder.DropTable(
-                name: "DaysTrains");
+                "DaysTrains");
 
             migrationBuilder.DropTable(
-                name: "SeatEntity");
+                "SeatEntity");
 
             migrationBuilder.DropTable(
-                name: "TicketEntities");
+                "TicketEntities");
 
             migrationBuilder.DropTable(
-                name: "CityEntity");
+                "CityEntity");
 
             migrationBuilder.DropTable(
-                name: "DayEntity");
+                "DayEntity");
 
             migrationBuilder.DropTable(
-                name: "CarriageEntity");
+                "CarriageEntity");
 
             migrationBuilder.DropTable(
-                name: "TrainEntities");
+                "TrainEntities");
         }
     }
 }

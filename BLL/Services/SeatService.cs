@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using BLL.Models;
-using DAL.Interfaces;
+﻿using BLL.Models;
 
 namespace BLL.Services
 {

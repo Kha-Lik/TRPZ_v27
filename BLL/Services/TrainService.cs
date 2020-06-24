@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using BLL.Models;
-using DAL;
 using DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,8 +10,8 @@ namespace BLL.Services
 {
     public class TrainService : ITrainService
     {
-        private readonly IUnitOfWork _unit;
         private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unit;
 
         public TrainService(IUnitOfWork unit, IMapper mapper)
         {
@@ -27,9 +26,9 @@ namespace BLL.Services
                 .Include(t => t.Dates)
                 .Include(t => t.Carriages)
                 .ThenInclude(c => c.Seats).Where(t =>
-                t.Cities.Any(c => c.CityEntity.Name.Equals(source)) && 
-                t.Cities.Any(c => c.CityEntity.Name.Equals(destination)) && 
-                t.Dates.Any(d => d.Day.Date.Equals(date.Date))).ToList();
+                    t.Cities.Any(c => c.CityEntity.Name.Equals(source)) &&
+                    t.Cities.Any(c => c.CityEntity.Name.Equals(destination)) &&
+                    t.Dates.Any(d => d.Day.Date.Equals(date.Date))).ToList();
             return _mapper.Map<ICollection<Train>>(trains);
         }
 

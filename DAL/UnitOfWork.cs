@@ -6,8 +6,9 @@ namespace DAL
     public class UnitOfWork : IUnitOfWork
     {
         private readonly TicketsDbContext _context;
-        
-        public UnitOfWork(IRepository<TrainEntity> trainRepository, IRepository<TicketEntity> ticketRepository, TicketsDbContext context)
+
+        public UnitOfWork(IRepository<TrainEntity> trainRepository, IRepository<TicketEntity> ticketRepository,
+            TicketsDbContext context)
         {
             TrainRepository = trainRepository;
             TicketRepository = ticketRepository;
@@ -15,9 +16,9 @@ namespace DAL
         }
 
         public IRepository<TrainEntity> TrainRepository { get; }
-        
+
         public IRepository<TicketEntity> TicketRepository { get; }
-        
+
         public void Save()
         {
             _context.SaveChanges();

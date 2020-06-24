@@ -11,30 +11,31 @@ namespace TRPZ_v27
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
-        private readonly ITrainService _trainService;
         private readonly ICarriageService _carriageService;
-        private readonly ITicketService _ticketService;
         private readonly ISeatService _seatService;
-
-        private ICollection<Train> _trains;
-        private ICollection<Carriage> _carriages;
-        private ICollection<Seat> _seats;
-
-        private Train _train;
+        private readonly ITicketService _ticketService;
+        private readonly ITrainService _trainService;
         private Carriage _carriage;
-        private Seat _seat;
-        private string _sourceCity;
-        private string _destinationCity;
-        private DateTime _date;
+        private ICollection<Carriage> _carriages;
         private CarriageClass _class;
-        private string _passenger;
-        private Int64 _ticketNum;
+        private DateTime _date;
+        private string _destinationCity;
+        private RelayCommand _findCarriagesCommand;
 
         private RelayCommand _findTrainsCommand;
-        private RelayCommand _findCarriagesCommand;
+        private string _passenger;
+        private Seat _seat;
+        private ICollection<Seat> _seats;
+        private string _sourceCity;
         private RelayCommand _takeTicketCommand;
+        private long _ticketNum;
 
-        public MainWindowViewModel(ITrainService trainService, ICarriageService carriageService, ITicketService ticketService, ISeatService seatService)
+        private Train _train;
+
+        private ICollection<Train> _trains;
+
+        public MainWindowViewModel(ITrainService trainService, ICarriageService carriageService,
+            ITicketService ticketService, ISeatService seatService)
         {
             _trainService = trainService;
             _carriageService = carriageService;
@@ -82,8 +83,8 @@ namespace TRPZ_v27
                 _train = value;
                 OnPropertyChanged(nameof(SelectedTrain));
             }
-        } 
-        
+        }
+
         public Carriage SelectedCarriage
         {
             get => _carriage;
@@ -93,8 +94,8 @@ namespace TRPZ_v27
                 OnPropertyChanged(nameof(SelectedCarriage));
                 Seats = value.Seats.Where(s => !s.IsTaken).ToList();
             }
-        } 
-        
+        }
+
         public Seat SelectedSeat
         {
             get => _seat;
@@ -114,7 +115,7 @@ namespace TRPZ_v27
                 OnPropertyChanged(nameof(SourceCity));
             }
         }
-        
+
         public string DestinationCity
         {
             get => _destinationCity;
@@ -144,7 +145,7 @@ namespace TRPZ_v27
                 OnPropertyChanged(nameof(Class));
             }
         }
-        
+
         public string Passenger
         {
             get => _passenger;
@@ -165,18 +166,16 @@ namespace TRPZ_v27
             }
         }
 
-        public ICollection<CarriageClass> Classes => 
-            Enum.GetValues(typeof(CarriageClass)).Cast<CarriageClass>().ToList<CarriageClass>();
+        public ICollection<CarriageClass> Classes =>
+            Enum.GetValues(typeof(CarriageClass)).Cast<CarriageClass>().ToList();
 
-        public RelayCommand FindTrainsCommand => _findTrainsCommand ??= new RelayCommand(o =>
-        {
-            Trains = _trainService.GetSpecifiedTrains(SourceCity, DestinationCity, Date);
-        }, o => CheckCitiesAndDate());
+        public RelayCommand FindTrainsCommand => _findTrainsCommand ??=
+            new RelayCommand(o => { Trains = _trainService.GetSpecifiedTrains(SourceCity, DestinationCity, Date); },
+                o => CheckCitiesAndDate());
 
-        public RelayCommand FindCarriagesCommand => _findCarriagesCommand ??= new RelayCommand(o =>
-        {
-            Carriages = _carriageService.GetSpecifiedCarriages(Class, SelectedTrain);
-        }, o => CheckTrainAndClass());
+        public RelayCommand FindCarriagesCommand => _findCarriagesCommand ??=
+            new RelayCommand(o => { Carriages = _carriageService.GetSpecifiedCarriages(Class, SelectedTrain); },
+                o => CheckTrainAndClass());
 
         public RelayCommand TakeTicketCommand => _takeTicketCommand ??= new RelayCommand(o =>
         {
@@ -205,22 +204,22 @@ namespace TRPZ_v27
 
         private bool CheckCitiesAndDate()
         {
-            return SourceCity != null && 
-                   DestinationCity != null && 
+            return SourceCity != null &&
+                   DestinationCity != null &&
                    Date != default;
         }
 
         private bool CheckTrainAndClass()
         {
-            return SelectedTrain != null && 
+            return SelectedTrain != null &&
                    Class != default;
         }
 
         private bool CheckTicket()
         {
-            return CheckCitiesAndDate() && 
-                   CheckTrainAndClass() && 
-                   Passenger != null && 
+            return CheckCitiesAndDate() &&
+                   CheckTrainAndClass() &&
+                   Passenger != null &&
                    SelectedSeat != null &&
                    SelectedCarriage != null;
         }

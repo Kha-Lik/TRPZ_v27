@@ -14,6 +14,6 @@ namespace DAL
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>))
                 .AddScoped<IUnitOfWork, UnitOfWork>();
             return services;
-        } 
+        }
     }
 }

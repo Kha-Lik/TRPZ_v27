@@ -21,29 +21,29 @@
             <Setter Property="Background" Value="Lavender" />
         </Style>
         <Style TargetType="StackPanel">
-            <Setter Property="Margin" Value="5"></Setter>
+            <Setter Property="Margin" Value="5" />
         </Style>
     </Window.Resources>
     <Grid>
         <StackPanel Orientation="Horizontal">
             <StackPanel Width="225">
                 <TextBlock>Source city</TextBlock>
-                <TextBox Text="{Binding SourceCity}"></TextBox>
+                <TextBox Text="{Binding SourceCity}" />
                 <TextBlock>Destination city</TextBlock>
-                <TextBox Text="{Binding DestinationCity}"></TextBox>
-                <DatePicker SelectedDate="{Binding Date}"></DatePicker>
+                <TextBox Text="{Binding DestinationCity}" />
+                <DatePicker SelectedDate="{Binding Date}" />
                 <Button Command="{Binding FindTrainsCommand}">Find trains</Button>
             </StackPanel>
             <StackPanel Width="225">
                 <TextBlock>Class</TextBlock>
-                <ComboBox SelectedItem="{Binding Class}" ItemsSource="{Binding Classes}" Margin="5"></ComboBox>
+                <ComboBox SelectedItem="{Binding Class}" ItemsSource="{Binding Classes}" Margin="5" />
                 <TextBlock>Trains</TextBlock>
                 <ListBox SelectedItem="{Binding SelectedTrain}" ItemsSource="{Binding Trains}" MinHeight="200">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
                                 <TextBlock>Train number</TextBlock>
-                                <TextBox IsReadOnly="True" Text="{Binding Path=Number}"></TextBox>
+                                <TextBox IsReadOnly="True" Text="{Binding Path=Number}" />
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -52,14 +52,14 @@
             </StackPanel>
             <StackPanel Width="225">
                 <TextBlock>Passenger</TextBlock>
-                <TextBox Text="{Binding Passenger}"></TextBox>
+                <TextBox Text="{Binding Passenger}" />
                 <TextBlock>Carriages</TextBlock>
                 <ListBox SelectedItem="{Binding SelectedCarriage}" ItemsSource="{Binding Carriages}" MinHeight="200">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
                                 <TextBlock>Carriage number</TextBlock>
-                                <TextBox IsReadOnly="True" Text="{Binding Path=Number}"></TextBox>
+                                <TextBox IsReadOnly="True" Text="{Binding Path=Number}" />
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -73,14 +73,14 @@
                         <DataTemplate>
                             <StackPanel>
                                 <TextBlock>Seat number</TextBlock>
-                                <TextBox IsReadOnly="True" Text="{Binding Path=Number}"></TextBox>
+                                <TextBox IsReadOnly="True" Text="{Binding Path=Number}" />
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
-                </ListBox>                
+                </ListBox>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock> №: </TextBlock>
-                    <TextBox Text="{Binding TicketNum}" IsReadOnly="True" MinWidth="150"></TextBox>
+                    <TextBox Text="{Binding TicketNum}" IsReadOnly="True" MinWidth="150" />
                 </StackPanel>
             </StackPanel>
         </StackPanel>

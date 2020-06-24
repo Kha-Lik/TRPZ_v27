@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq;
 using DAL.Entities;
 
 namespace DAL.Interfaces
@@ -10,11 +8,11 @@ namespace DAL.Interfaces
         IQueryable<TEntity> GetAll();
 
         TEntity GetById(int id);
-        
+
         void Create(TEntity entity);
-        
+
         void Update(TEntity entity);
-        
+
         void Delete(TEntity entity);
     }
 }

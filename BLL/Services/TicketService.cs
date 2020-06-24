@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using AutoMapper;
 using BLL.Models;
-using DAL;
 using DAL.Entities;
 using DAL.Interfaces;
 
@@ -10,9 +9,9 @@ namespace BLL.Services
     public class TicketService : ITicketService
     {
         private readonly IUnitOfWork _unit;
-        private IMapper _mapper;
+        private readonly IMapper _mapper;
 
-        public TicketService( IMapper mapper, IUnitOfWork unit)
+        public TicketService(IMapper mapper, IUnitOfWork unit)
         {
             _mapper = mapper;
             _unit = unit;
