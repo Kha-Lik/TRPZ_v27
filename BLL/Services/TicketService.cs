@@ -9,30 +9,26 @@ namespace BLL.Services
 {
     public class TicketService : ITicketService
     {
-        private IInMemoryStorage _inMemoryStorage;
-        private ITrainService _trainService;
-        private ICarriageService _carriageService;
+        private readonly IUnitOfWork _unit;
         private IMapper _mapper;
 
-        public TicketService(IInMemoryStorage inMemoryStorage, IMapper mapper, ITrainService trainService, ICarriageService carriageService)
+        public TicketService( IMapper mapper, IUnitOfWork unit)
         {
-            _inMemoryStorage = inMemoryStorage;
             _mapper = mapper;
-            _trainService = trainService;
-            _carriageService = carriageService;
+            _unit = unit;
         }
 
         public Ticket TakeTicket(Ticket ticket)
         {
-            if (_inMemoryStorage.Tickets.LastOrDefault() != null)
+            if (_unit.TicketRepository.GetAll().AsEnumerable().LastOrDefault() != null)
                 // ReSharper disable once PossibleNullReferenceException
-                ticket.Number = ++_inMemoryStorage.Tickets.LastOrDefault().Number;
+                ticket.Number = ++_unit.TicketRepository.GetAll().AsEnumerable().LastOrDefault().Number;
             else
                 ticket.Number = 1;
 
             var ticketEntity = _mapper.Map<TicketEntity>(ticket);
-            _inMemoryStorage.Tickets.Add(ticketEntity);
-            _inMemoryStorage.Save();
+            _unit.TicketRepository.Create(ticketEntity);
+            _unit.Save();
             return ticket;
         }
     }

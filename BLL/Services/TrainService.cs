@@ -5,30 +5,38 @@ using AutoMapper;
 using BLL.Models;
 using DAL;
 using DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace BLL.Services
 {
     public class TrainService : ITrainService
     {
-        private IInMemoryStorage _inMemoryStorage;
-        private IMapper _mapper;
+        private readonly IUnitOfWork _unit;
+        private readonly IMapper _mapper;
 
-        public TrainService(IInMemoryStorage inMemoryStorage, IMapper mapper)
+        public TrainService(IUnitOfWork unit, IMapper mapper)
         {
-            _inMemoryStorage = inMemoryStorage;
+            _unit = unit;
             _mapper = mapper;
         }
 
         public ICollection<Train> GetSpecifiedTrains(string source, string destination, DateTime date)
         {
-            var trains = _inMemoryStorage.Trains.Where(t =>
-                t.Cities.Contains(source) && t.Cities.Contains(destination) && t.Dates.Contains(date.Date));
+            var trains = _unit.TrainRepository.GetAll()
+                .Include(t => t.Cities)
+                .Include(t => t.Dates)
+                .Include(t => t.Carriages)
+                .ThenInclude(c => c.Seats).Where(t =>
+                t.Cities.Any(c => c.CityEntity.Name.Equals(source)) && 
+                t.Cities.Any(c => c.CityEntity.Name.Equals(destination)) && 
+                t.Dates.Any(d => d.Day.Date.Equals(date.Date))).ToList();
             return _mapper.Map<ICollection<Train>>(trains);
         }
 
         public Train GetTrainByNum(int num)
         {
-            var train = _inMemoryStorage.Trains.First(t => t.Number == num);
+            var train = _unit.TrainRepository.GetAll().Include(t => t.Carriages)
+                .ThenInclude(c => c.Seats).First(t => t.Number == num);
             return _mapper.Map<Train>(train);
         }
     }
