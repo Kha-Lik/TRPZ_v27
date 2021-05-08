@@ -2,10 +2,9 @@
 
 namespace DAL.Entities
 {
-    [Serializable]
-    public class TicketEntity
+    public class TicketEntity : BaseEntity
     {
-        public Int64 Number { get; set; }
+        public long Number { get; set; }
         public string Passenger { get; set; }
         public DateTime Date { get; set; }
         public string Source { get; set; }
